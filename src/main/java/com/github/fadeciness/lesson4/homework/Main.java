@@ -9,7 +9,6 @@ import com.github.fadeciness.lesson4.homework.service.ArrayElementReplacer;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
@@ -32,33 +31,30 @@ public class Main {
         System.out.println("Задание 2 завершено\n\n\n\n");
 
         System.out.println("Задание 3: фрукты и коробки");
-        List<Fruit> fruits = Arrays.asList(
+        Box<Fruit> fruitBox = new Box<>();
+        Box<Orange> orangeBox = new Box<>();
+        Box<Apple> appleBox = new Box<>();
+        fruitBox.addFruits(
                 new Apple(),
                 new Orange(),
                 new Apple(),
                 new Orange(),
                 new Apple()
         );
-        List<Apple> apples = Arrays.asList(
+        appleBox.addFruits(
                 new Apple(),
                 new Apple(),
                 new Apple(),
                 new Apple(),
                 new Apple()
         );
-        List<Orange> oranges = Arrays.asList(
+        orangeBox.addFruits(
                 new Orange(),
                 new Orange(),
                 new Orange(),
                 new Orange(),
                 new Orange()
         );
-        Box<Fruit> fruitBox = new Box<>();
-        Box<Orange> orangeBox = new Box<>();
-        Box<Apple> appleBox = new Box<>();
-        fruitBox.addFruits(fruits);
-        appleBox.addFruits(apples);
-        orangeBox.addFruits(oranges);
 
         System.out.println("Вес коробки с яблоками: " + appleBox.getWeight());
         System.out.println("Вес коробки с апельсинами: " + orangeBox.getWeight());

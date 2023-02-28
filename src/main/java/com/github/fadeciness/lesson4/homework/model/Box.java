@@ -1,36 +1,47 @@
 package com.github.fadeciness.lesson4.homework.model;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
+import java.util.Arrays;
 import java.util.List;
 
 public class Box<T extends Fruit> implements Comparable<Box<? extends Fruit>> {
 
     private final static float COMPARE_THRESHOLD = 0.001F;
 
-    private final List<T> fruits = new ArrayList<>();
+    private final List<T> container;
 
-    public List<T> getFruits() {
-        return fruits;
+    public Box() {
+        this.container = new ArrayList<>();
     }
 
-    public boolean addFruit(T fruit) {
-        return fruits.add(fruit);
+    @SafeVarargs
+    public Box(T... fruits) {
+        this.container = new ArrayList<>(Arrays.asList(fruits));
     }
 
-    public boolean addFruits(List<T> fruit) {
-        return fruits.addAll(fruit);
+    public List<T> getContainer() {
+        return container;
+    }
+
+    public void add(T fruit) {
+        container.add(fruit);
+    }
+
+    @SafeVarargs
+    public final void addFruits(T... fruits) {
+        container.addAll(Arrays.asList(fruits));
     }
 
     public void sprinkle(Box<T> newBox) {
-        newBox.addFruits(this.fruits);
-        this.fruits.clear();
+        if (this != newBox) {
+            newBox.container.addAll(this.container);
+            this.container.clear();
+        }
     }
 
     public float getWeight() {
-        float result = 0;
-        for (T fruit : fruits) {
+        float result = 0.0F;
+        for (T fruit : container) {
             result += fruit.getWeight();
         }
         return result;
@@ -55,7 +66,7 @@ public class Box<T extends Fruit> implements Comparable<Box<? extends Fruit>> {
     @Override
     public String toString() {
         return "Box{" +
-                "fruits=" + fruits +
+                "fruits=" + container +
                 '}';
     }
 }
