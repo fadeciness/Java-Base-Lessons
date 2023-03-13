@@ -16,6 +16,7 @@ public class DaemonExample {
         });
         tTimer.setDaemon(true); // можно закомментировать: тогда main не остановится никогда
 //        tTimer.getState(); - бессмысленная операция - вернёт состояние потока в момент когда мы спросили, однако через 1 такт поток уже может сменить состояние
+//        tTimer.stop(); // не использовать, т.к. могут повредиться данные / "не отпуститься" ресурсы см. ThreadStopApp
         tTimer.start();
         System.out.println("main -> sleep");
         try {

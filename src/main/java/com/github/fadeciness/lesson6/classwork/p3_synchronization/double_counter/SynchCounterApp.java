@@ -1,0 +1,28 @@
+package com.github.fadeciness.lesson6.classwork.p3_synchronization.double_counter;
+
+public class SynchCounterApp {
+    public static void main(String[] args) {
+        SynchDoubleCounter synchDoubleCounter = new SynchDoubleCounter();
+
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                synchDoubleCounter.dec1();
+                System.out.println("dec1 sdc.value1: " + synchDoubleCounter.value1());
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                synchDoubleCounter.inc2();
+                System.out.println("inc2 sdc.value2: " + synchDoubleCounter.value2());
+            }
+        }).start();
+
+        new Thread(() -> {
+            for (int i = 0; i < 5; i++) {
+                synchDoubleCounter.dec2();
+                System.out.println("dec2 sdc.value2: " + synchDoubleCounter.value2());
+            }
+        }).start();
+    }
+}
