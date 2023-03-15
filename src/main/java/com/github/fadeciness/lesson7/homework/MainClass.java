@@ -5,7 +5,7 @@ public class MainClass {
     public static void main(String[] args) {
         System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Подготовка!!!");
 
-        Race race = new Race(new Road(60), new Tunnel(), new Road(40));
+        Race race = new Race(CARS_COUNT, new Road(60), new Tunnel(), new Road(40, true));
 
         Car[] cars = new Car[CARS_COUNT];
         for (int i = 0; i < cars.length; i++) {
@@ -14,8 +14,15 @@ public class MainClass {
         for (int i = 0; i < cars.length; i++) {
             new Thread(cars[i]).start();
         }
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
-        System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+
+        try {
+            race.getParticipantsPrepared().await();
+            System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка началась!!!");
+            race.getParticipantsFinish().await();
+            System.out.println("ВАЖНОЕ ОБЪЯВЛЕНИЕ >>> Гонка закончилась!!!");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
 
