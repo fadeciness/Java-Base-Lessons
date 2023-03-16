@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class WordFrequency {
@@ -30,5 +31,14 @@ public class WordFrequency {
 //                    throw new RuntimeException("Не найдено ни одного слова");
 //                });
 //        System.out.println("Самое часто встречающееся слово: " + theMostFrequencyWord);
+
+        // Other solution
+        Arrays.stream(bigText.split("\\s"))
+                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .entrySet().stream()
+                .max(Comparator.comparingLong(Map.Entry::getValue))
+                .map(Map.Entry::getKey)
+                .ifPresent(w -> System.out.println("The most frequency word: " + w));
+
     }
 }
