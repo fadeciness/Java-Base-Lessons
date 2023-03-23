@@ -119,6 +119,8 @@ public class ShopService {
         }
     }
 
+    // Одна из целей использования hibernate - вынести логику из БД/запросов на уровень java-кода
+    // данную задачу можно было бы решить через java-объекты
     public static Double avgPrice(String personName, String productName) {
         Double avgPrice = null;
         Session session = null;
